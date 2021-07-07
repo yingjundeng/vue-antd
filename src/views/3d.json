@@ -1,0 +1,18 @@
+{
+  "v": "7.2.2-dev18",
+  "p": {
+    "autoAdjustIndex": true,
+    "hierarchicalRendering": true
+  },
+  "a": {
+    "sceneOrthographic": false
+  },
+  "d": [],
+  "scene": {
+    "eye": [
+      6.61398,
+      250.94396,
+      962.10473
+    ]
+  }
+}
