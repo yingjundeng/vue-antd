@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e1389"],{"7a09":function(e){e.exports=JSON.parse('{"v":"7.2.2-dev18","p":{"autoAdjustIndex":true,"hierarchicalRendering":true},"a":{"sceneOrthographic":false},"d":[],"scene":{"eye":[6.61398,250.94396,962.10473]}}')}}]);
