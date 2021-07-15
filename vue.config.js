@@ -29,7 +29,7 @@ module.exports = {
 
   // 放置静态资源的地方 (js/css/img/font/...)
   assetsDir: '',
-  publicPath: publicPath,
+  publicPath: './',
   // eslint校验
   lintOnSave: false,
   productionSourceMap: false,
