@@ -1,6 +1,6 @@
 <template>
-  <div class="ature-page page-padding-md">
-     <div class="ature-left" :style="{width:`${atureLeftWidth}px`}">
+  <div class="ature-page">
+     <!-- <div class="ature-left" :style="{width:`${atureLeftWidth}px`}">
          <a-card style="height:90vh;background:rgba(24, 30, 49, 0.8);border:none;">
             <j-tree v-if="isCaret"/>
           </a-card>
@@ -24,7 +24,9 @@
          </div>
          <div class="search-input"><a-input-search placeholder="输入设备/传感器名称查找" style="width:230px;" size="small"/></div>
          <div class="jump-span"><span>返回</span><span>前进</span></div>
-     </div>
+     </div> -->
+
+     <iframe src="https://www.hightopo.com/demo/ketian-cgznksh/" frameborder="0" width="100%" height="800px"></iframe>
   </div>
 </template>
 

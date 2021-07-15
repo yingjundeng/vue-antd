@@ -4,10 +4,9 @@
 
 <template>
   <a-carousel autoplay class="a-body">
-    <img :src="data[0]" alt />
-    <img :src="data[1]" alt />
-    <img :src="data[2]" alt />
-    <img :src="data[3]" alt />
+    <img :src="data[1]" alt style="transform: scaleX(-1);"/>
+    <img :src="data[2]" alt style="transform: scaleX(-1);"/>
+    <img :src="data[3]" alt style="transform: scaleX(-1);"/>
   </a-carousel>
 </template>
 <script>

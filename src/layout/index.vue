@@ -264,7 +264,7 @@ export default {
   /* padding: 20px; */
   color: #A7AAB2;
    background:rgba(24, 30, 49, 0.3);
-   background-image: url('../assets/viewBg.png'); 
+   /* background-image: url('../assets/viewBg.png');  */
   /* background: #fff; */
 }
 #components-layout-demo-custom-trigger .trigger {

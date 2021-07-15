@@ -4,7 +4,54 @@
 
 import axios from 'axios';
 
-
+// 错误处理函数
+const err = (error) => {
+    if (error.response) {
+      const data = error.response.data
+      // const token = Vue.ls.get(ACCESS_TOKEN)
+      if (error.response.status === 403) {
+          Notify({ type: 'danger', message: data.message||data.msg });
+      }
+      if (error.response.status === 401) {
+          Notify({ type: 'danger', message: '登录已过期，请重新登录。' });
+        // if (token) {
+        //   store.dispatch('Logout').then(() => {
+        //     setTimeout(() => {
+        //       window.location.reload()
+        //     }, 1500)
+        //   })
+        // }
+      }
+    }
+    return Promise.reject(error)
+  }
+/**
+ *  axios请求拦截器
+ **/
+ axios.interceptors.request.use(config => {
+    return config
+  }, err)
+  
+  /**
+   * axios 响应拦截器
+   **/
+  axios.interceptors.response.use(response => {
+      console.log(response)
+        const res = response.data
+        if (res.code !== 0&&res.code!==200) { 
+            if(res.code === 401){
+                Notify({ type: 'danger', message: '登录已过期，请重新登录。' });
+                window.location.href = '/login'
+            }else if(res.code === 403){
+                Notify({ type: 'danger', message: '无访问权限，请联系管理员。' });
+            }
+            return Promise.reject('error')
+        }else{
+            return response
+        }
+        
+  }, err)
+  
 /**
  * axios 登录请求方法
  * @param：{string}     method          请求类型,必填

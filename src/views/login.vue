@@ -135,31 +135,9 @@ export default {
     // 提交
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.btnloading = true;
-          this.login.username = values.username;
-          this.login.password = values.password;
-          this.login.code = values.code;
-          // 密码加密
-          const user = encryption({
-            data: this.login,
-            key: "thanks,pig4cloud",
-            param: ["password"]
-          });
-          getUserInfo().then(res => {
-            // 判断是否成功
-            if(res.code===0){
-              this.$router.push({path: "/home"});
-              this.setUserInfo(res.data.sysUser||'')
-              this.loginSuccess()
-              this.btnloading = false;
-            }else{
-              this.$message.error(res.msg)
-            }
-          });
-        }
-      });
+      this.$router.push({path: "/home"});
+      this.loginSuccess()
+      this.btnloading = false;
     }
     // handleSubmit(e) {
     //   e.preventDefault();
@@ -241,12 +219,12 @@ export default {
 .logo {
   font-size: 30px;
   color: #fff;
-  width: 60vw;
+  width: 24vw;
   display: flex;
   align-items: center;
 }
 .logo img {
-  height: 80px;
+  height: 38px;
   margin-right: 20px;
 }
 
