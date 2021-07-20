@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios';
-
+import store from 'vuex'
 // 错误处理函数
 const err = (error) => {
     if (error.response) {

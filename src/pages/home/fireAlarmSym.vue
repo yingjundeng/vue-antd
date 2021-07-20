@@ -26,7 +26,7 @@
          <div class="jump-span"><span>返回</span><span>前进</span></div>
      </div> -->
 
-     <iframe src="https://www.hightopo.com/demo/ketian-cgznksh/" frameborder="0" width="100%" height="800px"></iframe>
+     <iframe src="https://www.hightopo.com/demo/ketian-cgznksh/" frameborder="0" width="100%" :height="`${minHeight}px`"></iframe>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
       return{
           isCaret:true,
           atureLeftWidth:240,
-          minHeight: window.innerHeight - 64 - 122,
+          minHeight: window.innerHeight + 64 + 126,
       }
   },
   methods:{

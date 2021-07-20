@@ -4,7 +4,7 @@
     <div class="conbox">
       <div class="logo">
         <img src="../assets/img/logo.png" alt />
-        <div>翠宫智能化集成系统</div>
+        <div style="white-space:nowrap;">翠宫智能化集成系统</div>
       </div>
       <div class="smbox">
         <!-- 切换语言 -->
@@ -75,9 +75,9 @@
           </a-form>
         </div>
       </div>
-      <div class="foot">
+      <!-- <div class="foot">
         <a class="copyright-a" href="#">ICP备XXXXXXXXX号</a> Copyright ©2021-2021 版权所有 : 
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -135,9 +135,33 @@ export default {
     // 提交
     handleSubmit(e) {
       e.preventDefault();
-      this.$router.push({path: "/home"});
-      this.loginSuccess()
-      this.btnloading = false;
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.btnloading = true;
+          this.login.username = values.username;
+          this.login.password = values.password;
+          // this.login.code = values.code;
+          // 密码加密
+          const user = encryption({
+            data: this.login,
+            key: "thanks,pig4cloud",
+            param: ["password"]
+          });
+          getUserInfo().then(res => {
+            // 判断是否成功
+            if(res.code===0){
+              console.log(res)
+              this.$cookies.set('cgtoken',res.data.sysUser.wxOpenid||'token_LOGIN',60*5)
+              this.$router.push({path: "/home"});
+              this.setUserInfo(res.data.sysUser||'')
+              this.loginSuccess()
+              this.btnloading = false;
+            }else{
+              this.$message.error(res.msg)
+            }
+          });
+        }
+      });
     }
     // handleSubmit(e) {
     //   e.preventDefault();
