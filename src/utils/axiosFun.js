@@ -83,7 +83,6 @@ const loginRequest = (method, url, params, variation = "F") => {
     }
 
 };
-
 /**
  * axios 通用公用方法
  * @param：{string}     method          请求类型,必填
@@ -97,7 +96,7 @@ const request = (method, url, params, variation = "F") => {
             method: method,
             url: url,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
             data: params,
@@ -107,7 +106,7 @@ const request = (method, url, params, variation = "F") => {
             method: method,
             url: url,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
             params: params,

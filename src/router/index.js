@@ -20,7 +20,7 @@ const routes = [
 {
   path: '/',
   name: '首页',
-  redirect:'/login',
+  redirect:'/home',
   component:viewIndex,
   meta: {
     requireAuth: true,

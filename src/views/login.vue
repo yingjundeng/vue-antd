@@ -132,13 +132,42 @@ export default {
         description: `${timeFix()}，欢迎回来`
       })
     },
-    // 提交
-    handleSubmit(e) {
-      e.preventDefault();
+    handleSubmit(){
       this.$router.push({path: "/home"});
       this.loginSuccess()
       this.btnloading = false;
-    }
+    },
+    // 提交
+    // handleSubmit(e) {
+    //   e.preventDefault();
+    //   this.form.validateFields((err, values) => {
+    //     if (!err) {
+    //       this.btnloading = true;
+    //       this.login.username = values.username;
+    //       this.login.password = values.password;
+    //       // this.login.code = values.code;
+    //       // 密码加密
+    //       const user = encryption({
+    //         data: this.login,
+    //         key: "thanks,pig4cloud",
+    //         param: ["password"]
+    //       });
+    //       getUserInfo().then(res => {
+    //         // 判断是否成功
+    //         if(res.code===0){
+    //           console.log(res)
+    //           this.$cookies.set('access_token',res.data.sysUser.wxOpenid||'token_LOGIN',60*5)
+    //           this.$router.push({path: "/home"});
+    //           this.setUserInfo(res.data.sysUser||'')
+    //           this.loginSuccess()
+    //           this.btnloading = false;
+    //         }else{
+    //           this.$message.error(res.msg)
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
     // handleSubmit(e) {
     //   e.preventDefault();
     //   this.form.validateFields((err, values) => {

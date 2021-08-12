@@ -11,6 +11,14 @@ import {
 export function getAutomaticList(query) {
     return request('get', '/admin/log/page', query, "Y")
 }
+//所有事物
+export function getThingsList(query) {
+    return request('get', '/api/model/v1/things', query, "Y")
+}
+//新增事物
+export function addThingsList(query) {
+    return request('post', '/api/model/v1/things', query, "F")
+}
 // export function getAutomaticList(query) {
 //     return request('get', '/api/model/v1/thingtypes', query, "Y")
 // }

@@ -15,18 +15,22 @@
       <a-form layout="horizontal">
         <div :class="advanced ? null: 'fold'">
           <a-row >
-          <a-col :md="8" :sm="24" >
+          <a-col :md="7" :sm="24" >
             <a-form-item
-              label="模式名称"
+              label="报警级别"
               :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
+              :wrapperCol="{span: 16, offset: 1}"
             >
-              <a-input-number style="width: 100%" placeholder="请输入模式名称" />
+              <a-select default-value="全部事件" style="width: 120px">
+                <a-select-option value="jack">
+                    Jack
+                </a-select-option>
+               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :md="8" :sm="24" >
+          <a-col :md="7" :sm="24" >
             <a-form-item
-              label="模式类型"
+              label="报警类型"
               :labelCol="{span: 5}"
               :wrapperCol="{span: 18, offset: 1}"
             >
@@ -38,9 +42,22 @@
                
             </a-form-item>
           </a-col>
-          <a-col :md="8" :sm="24" >
+          <a-col :md="5" :sm="24" >
             <a-form-item
-              label=""
+              label="位置"
+              :labelCol="{span: 5}"
+              :wrapperCol="{span: 18, offset: 1}"
+            >
+              <a-select default-value="启用" style="width: 120px">
+                <a-select-option value="jack">
+                    Jack
+                </a-select-option>
+               </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :md="5" :sm="24" >
+            <a-form-item
+              label="状态"
               :labelCol="{span: 5}"
               :wrapperCol="{span: 18, offset: 1}"
             >
@@ -73,13 +90,16 @@
       @change="handleTableChange"
       @selectedRowChange="onSelectChange">
       <div slot="action" slot-scope="{text, record}">
-          <a-button type="link" @click="seeOrEdit(record)">查看/编辑</a-button>
-        </div>
+        <a-button type="link" @click="seeOrEdit(record)">详情操作</a-button>
+      </div>
+      <div slot="fuzhu" slot-scope="{text, record}">
+        <a-icon type="video-camera" />
+        <a-divider type="vertical" />
+        <a-icon type="environment" />
+      </div>
     </standard-table>
     </a-card>
     <realTime-modal ref="realTimeModal"/>
-    
-    
   </div>
 </template>
 
@@ -94,16 +114,39 @@ const columns = [
     dataIndex: 'no'
   },
   {
-    title: '模式名称',
+    title: '报警时间',
+    dataIndex: 'alarmTime'
+  },
+  {
+    title: '报警级别',
+    dataIndex: 'title'
+  },
+  {
+    title: '报警名称',
     dataIndex: 'name'
   },
   {
-    title: '模式类型',
+    title: '报警类型',
     dataIndex: 'createBy',
     scopedSlots: { customRender: 'createBy' }
   },
   {
-    title: '模式描述',
+    title: '子系统',
+    dataIndex: 'ds',
+    
+  },
+  {
+    title: '设备名称',
+    dataIndex: 'we',
+    
+  },
+  {
+    title: '设备类型',
+    dataIndex: 'rr',
+    
+  },
+  {
+    title: '位置',
     dataIndex: 'updatedAt',
     
   },
@@ -115,6 +158,11 @@ const columns = [
     title: '操作',
     width:180,
     scopedSlots: { customRender: 'action' }
+  },
+  {
+    title: '辅助信息',
+    width:180,
+    scopedSlots: { customRender: 'fuzhu' }
   }
 ]
 
@@ -124,16 +172,39 @@ const defColumns = [
     dataIndex: 'no'
   },
   {
-    title: '模式名称',
+    title: '报警时间',
+    dataIndex: 'alarmTime'
+  },
+  {
+    title: '报警级别',
+    dataIndex: 'title'
+  },
+  {
+    title: '报警名称',
     dataIndex: 'name'
   },
   {
-    title: '模式类型',
+    title: '报警类型',
     dataIndex: 'createBy',
     scopedSlots: { customRender: 'createBy' }
   },
+ {
+    title: '子系统',
+    dataIndex: 'ds',
+    
+  },
   {
-    title: '模式描述',
+    title: '设备名称',
+    dataIndex: 'we',
+    
+  },
+  {
+    title: '设备类型',
+    dataIndex: 'rr',
+    
+  },
+  {
+    title: '位置',
     dataIndex: 'updatedAt',
     
   },
@@ -141,6 +212,16 @@ const defColumns = [
     title: '状态',
     dataIndex: 'status',
   },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    scopedSlots: { customRender: 'action' }
+  },
+  {
+    title: '辅助信息',
+    dataIndex: 'fuzhu',
+    scopedSlots: { customRender: 'fuzhu' }
+  }
 ]
 export default {
   name:'realTime',
@@ -271,7 +352,7 @@ export default {
       this.initData();
     },
       seeOrEdit(record){
-        this.$refs.automaticModal.showModal(record)
+        this.$refs.realTimeModal.showModal(record)
       },
       initData(){
           getAutomaticList(this.query).then(res=>{

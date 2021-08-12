@@ -54,6 +54,7 @@
     </div>
     <standard-table 
       :columns="columns"
+      :defColumns="defColumns"
       :dataSource="dataSource"
       :selectedRows.sync="selectedRows"
       :pagination="ipagination"
@@ -74,6 +75,35 @@ import StandardTable from '@/components/table/StandardTable'
 import automaticModal from './automaticModal'
 import {getAutomaticList,postManualCapture} from '@/api/admin/home'
 const columns = [
+  {
+    title: '序号',
+    dataIndex: 'no'
+  },
+  {
+    title: '模式名称',
+    dataIndex: 'name'
+  },
+  {
+    title: '模式类型',
+    dataIndex: 'createBy',
+    scopedSlots: { customRender: 'createBy' }
+  },
+  {
+    title: '模式描述',
+    dataIndex: 'updatedAt',
+    
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
+  },
+  {
+    title: '操作',
+    width:180,
+    scopedSlots: { customRender: 'action' }
+  }
+]
+const defColumns = [
   {
     title: '序号',
     dataIndex: 'no'
@@ -129,6 +159,7 @@ export default {
             total: 0
         },
         columns:columns,
+        defColumns:defColumns,
         dataSource:[]
       }
   },

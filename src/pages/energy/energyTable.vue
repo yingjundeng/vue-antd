@@ -44,6 +44,7 @@
                     width="100%" 
                     height="230px"  
                     text="历史用电量"
+                    :legend="['水','总用电','空调用电']"
                     :series="seriesData"/>
                   </a-card>
               </a-col>
@@ -51,10 +52,21 @@
       </div>
       <div style="margin-top:20px;">
         <a-card>
+            <div style="text-align:right;">
+            <a-radio-group  :value="size" size="small" @change="handleSizeChange">
+                <a-radio-button value="year">
+                    年
+                </a-radio-button>
+                <a-radio-button value="month">
+                    月
+                </a-radio-button>
+            </a-radio-group>
+            </div>
             <com-echart divId="henergyChart"
             width="100%" 
             height="230px"  
             text="历史用电量"
+            :legend="['水','总用电','空调用电']"
             :series="seriesData"/>
         </a-card>
       </div>
@@ -68,21 +80,22 @@ name:'energyTable',
 components:{comEchart},
 data(){
     return{
+        size:"year",
        seriesData:[
                 {
-                name: 'energent',
+                name: '水',
                 type: 'bar',
                 color:'#5D7092',
                 data: [15, 20, 36, 10, 18, 20]
                },
                {
-                name: 'importent',
+                name: '总用电',
                 type: 'bar',
                 color:'#5AD8A6',
                 data: [15, 20, 36, 12, 10, 20]
                },
                {
-                name: 'normal',
+                name: '空调用电',
                 type: 'bar',
                 color:'#7FBADB',
                 data: [15, 20, 36, 10, 13, 20]
@@ -92,7 +105,9 @@ data(){
     }
 },
 methods:{
-
+  handleSizeChange(val){
+    this.size = val.target.value
+  }
 }
 }
 </script>

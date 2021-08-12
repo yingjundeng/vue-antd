@@ -9,7 +9,7 @@
         :defaultSelectedKeys="['1']"
         :selectedKeys="[$route.path]"
       > 
-        <a-sub-menu v-if="item.children.length" v-for="item in menuChildren" :key="item.path">
+        <a-sub-menu v-if="item.children.length" v-for="item in menu" :key="item.path">
           <span slot="title">
             <a-icon :type="item.icon" />
             <span v-show="!collapsed">{{ item.name }}</span>
@@ -41,12 +41,12 @@
           @click="() => (collapsed = !collapsed)"
         />
         <!-- 中间MENU -->
-        <div class="middle-menu">
+        <!-- <div class="middle-menu">
           <div v-for="(item,index) in menu" :key="index+'oli'" :class="{active:activeSelsect==index}">
             <i :class="['iconfont',item.icon]"></i>
             <span @click="changeMenu(item,index)">{{item.name}}</span>
           </div>
-        </div>
+        </div> -->
         <div class="user-head">
           <!-- 切换语言 -->
           <!-- <div class="toggle">
@@ -118,7 +118,7 @@ export default {
   mounted(){
     this.refreshSave()
     this.refreshGetUserInfo()
-    this.routerFilter(this.menuChildren)
+    this.routerFilter(this.menu)
   },
   methods: {
     ...mapMutations('account', ['setUserInfo','setRouterMenu']),
@@ -165,7 +165,7 @@ export default {
             res.push(tmp)
         }
       })
-      this.menuChildren = deepCloned(res)
+      this.menu = deepCloned(res)
       return res
     },
     // 获取菜单
@@ -259,6 +259,9 @@ export default {
 .layoutbox {
   min-width: 1300px;
   height: 100%;
+}
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content{
+  overflow: hidden;
 }
 .admin-layout-content{
   /* padding: 20px; */

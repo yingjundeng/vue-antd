@@ -5,12 +5,12 @@
         <a-icon type="info-circle" class="mg-right-sm" style="color:#409EFD;"/>共<span style="color:#2877FF;margin:0 4px;" >4</span>条实时告警
     </div>
     <a-table :scroll="setScroll" :columns="columns" :dataSource="dataSource">
-    <a slot="action" slot-scope="text" href="javascript:;">Delete</a>
-    <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
-      <p>告警代码：{{ record.description }}</p>
-      <p>告警描述：{{ record.description }}</p>
-    </div>
-  </a-table>
+      <a slot="action" slot-scope="text" href="javascript:;">Delete</a>
+      <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
+        <p>告警代码：{{ record.description }}</p>
+        <p>告警描述：{{ record.description }}</p>
+      </div>
+    </a-table>
   <div class="min-title">历史告警记录</div>
   <a-table
   :scroll="setSolScroll" 

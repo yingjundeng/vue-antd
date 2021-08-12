@@ -20,7 +20,7 @@
           <a-card hoverable class="h-card">
               <div class="min-title-nolde">主图</div>
               <div style="height:200px;">    
-                 <img style="height:100%;width:100%;" src="../../assets/bg.png" alt=".png">
+                 <img style="height:100%;width:100%;" src="../../assets/cui.jpg" alt=".png">
               </div>
           </a-card>
           <a-card hoverable class="h-card">
@@ -91,9 +91,13 @@
                   <a-icon  style="color:#1F8AD2;float:right;margin-top:5px;" type="setting" />
               </div>
               <div class="player-view">
-                  <div v-for="item in 8" :key="item+'tu'">
-                      图像{{item}}
-                  </div>
+                  <div v-for="item in 8" :key="item+'tu'" >图像{{item}}</div>
+                <!-- <video-player 
+                v-for="item in 8" :key="item+'tu'" 
+                class="video-player vjs-custom-skin video-mu" 
+                ref="videoPlayer" 
+                :playsinline="true" 
+                :options="playerOptions"/> -->
               </div>
           </a-card>
       </div>
@@ -101,12 +105,41 @@
 </template>
 
 <script>
+import { videoPlayer } from "vue-video-player";
+  const playerOptions= {
+        playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+        autoplay: false, //如果true,浏览器准备好时开始回放。
+        muted: false, // 默认情况下将会消除任何音频。
+        loop: false, // 导致视频一结束就重新开始。
+        preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+        language: "zh-CN",
+        aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+        sources: [
+        {
+        type: 'application/x-mpegURL',
+        src: "http://open.andmu.cn/m3u8/83fc725118d1470863ce581ecbc21a30.m3u8", //视频url地址
+        },
+        ],
+        poster: require("../../assets/bg.png"), //你的封面地址
+        // width: document.documentElement.clientWidth,
+        notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+        controlBar: {
+        timeDivider: true,
+        durationDisplay: true,
+        remainingTimeDisplay: false,
+        fullscreenToggle: true, //全屏按钮
+        },
+        }
+import {getThingsList,addThingsList} from '@/api/admin/home'
 export default {
   name:'home',
+  components:{videoPlayer},
   data(){
       return{
         bodyHeight:window.innerHeight-70,
         config:{
+            playerOptions:playerOptions,
             header: ['报警时间', '级别', '类型','名称','子系统','设备类型','设备名称','位置'],
             data: [
                 ['行1列1', '行1列2', '行1列3','行1列1', '行1列2', '行1列3','行1列1', '行1列2'],
@@ -134,14 +167,50 @@ export default {
   },
   mounted(){
    this.initEchart()
+   
+//    this.initgetThingsList()
    this.isHidden = false
    setTimeout(()=>{
        this.$nextTick(() => {
          this.isHidden = true
        })
    },100)
+//    let stime = setInterval(()=>{
+//     this.addThings()
+//    },500)
+
+// for(let i =5;i<=62;i++){
+//     this.addThings(i)
+//   }
+// this.addThings(5)
   },
   methods:{
+      //批量新增事物
+      addThings(i){
+        const query=
+        {"name":"摄像头172.16.3."+i,"typeId":"main.camera","timeZone":"Asia/Shanghai","characteristics":[{"name":"ip","value":"172.16.3."+i}]}
+        // {
+        // "name":"摄像头",
+        // "typeId":"main.camera",
+        // "timeZone":"Asia/Shanghai",
+        // "characteristics":[
+        //     {"name":"ip","value":"4"},
+        //     {"name":"indexcode","value":""},
+        //     {"name":"playbackUrl","value":""},
+        //     {"name":"previewUrl","value":""},
+        //     {"name":"number","value":""},
+        //     {"name":"specifications","value":""},
+        //     {"name":"createTime","value":""},
+        // ]}
+          addThingsList(query).then(res=>{
+             console.log(res)
+          })
+      },
+      initgetThingsList(){
+        getThingsList().then(res=>{
+            console.log(res)
+        })
+      },
       initEchart(){
         let myChart = this.$echarts.init(document.getElementById('myechart'));
 
@@ -154,7 +223,7 @@ export default {
 
             },
             legend: {
-                data:['water','total_electronic','conditioner_electronic'],
+                data:['用水量','总用电','空调用电'],
                 top:'0%',
                 left: 'center',
             },
@@ -164,19 +233,19 @@ export default {
             yAxis: {},
             series: [
                 {
-                name: 'water',
+                name: '用水量',
                 type: 'bar',
                 color:'#5B8FF9',
                 data: [15, 20, 36, 10, 18, 20]
                },
                {
-                name: 'total_electronic',
+                name: '总用电',
                 type: 'bar',
                 color:'#5AD8A6',
                 data: [15, 20, 36, 12, 10, 20]
                },
                {
-                name: 'conditioner_electronic',
+                name: '空调用电',
                 type: 'bar',
                 color:'#5D7092',
                 data: [15, 20, 36, 10, 13, 20]
@@ -196,6 +265,8 @@ export default {
     display: flex;
     font-size: 17px;
     background: #F7F7F8;
+    overflow-y: scroll;
+    overflow-x:hidden;
     .h-left{
         width: 400px;
         margin-right:15px;
@@ -297,5 +368,19 @@ export default {
 
         }
     }
+}
+   /**滚动条样式 */
+.home::-webkit-scrollbar {
+    width: 6px;
+}
+.home::-webkit-scrollbar-thumb{
+border-radius: 10px;
+--webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+background: rgba(0,0,0,0.2);
+}
+.home::-webkit-scrollbar-track {
+--webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+border-radius: 0;
+background: rgba(0,0,0,0.1);
 }
 </style>

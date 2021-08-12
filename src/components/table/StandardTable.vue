@@ -43,9 +43,11 @@
 
 <script>
 import rankColumn from '../rankColumn/index.vue'
+import shareUtils from "@/mixins/utils";
 export default {
   name: 'StandardTable',
   components:{rankColumn},
+  mixins:[shareUtils],
   props: {
     bordered: Boolean,
     loading: [Boolean, Object],
@@ -84,6 +86,17 @@ export default {
           }
         })
       return totalList
+    },
+    rankCols(row){
+      let rowArr = []
+      row.forEach((item,index)=>{
+        if(item.fixed){
+          item.fixed = ''
+        }
+        rowArr.push(item)
+      })
+      this.columns = rowArr
+      console.log(this.columns)
     },
     onClear() {
       this.updateSelect([], [])

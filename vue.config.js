@@ -10,7 +10,7 @@
  //http://112.124.65.24
  //https://www.fastmock.site/mock/552fac5cc88f27249bff9351eeca2683/api
  //https://www.fastmock.site/mock/b8ca85fd736f66d70a642a24d3888712/api
-const url = 'https://www.fastmock.site/mock/552fac5cc88f27249bff9351eeca2683/api' 
+const url = 'http://112.124.65.24/' 
 
 // 如果是hash模式
 // env !== "development" ? "./" : "/",
@@ -46,6 +46,7 @@ module.exports = {
     extract: true,
 
     // 是否开启 CSS source map？
+
     sourceMap: false,
 
     // 为预处理器的 loader 传递自定义选项。比如传递给
@@ -58,7 +59,7 @@ module.exports = {
   },
   // 配置转发代理
   devServer: {
-    open: process.platform === 'darwin',
+    open: true,
     host: '0.0.0.0',
     port: 8080,
     https: false,

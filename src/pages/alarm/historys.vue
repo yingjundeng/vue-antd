@@ -19,7 +19,7 @@
               :labelCol="{span: 5}"
               :wrapperCol="{span: 18, offset: 1}"
             >
-              <a-select default-value="全部事件" style="width: 120px" @change="handleChange">
+              <a-select default-value="全部事件" style="width: 120px">
                 <a-select-option value="jack">
                     Jack
                 </a-select-option>
@@ -33,7 +33,7 @@
               :labelCol="{span: 5}"
               :wrapperCol="{span: 18, offset: 1}"
             >
-              <a-select default-value="启用" style="width: 120px" @change="handleChange">
+              <a-select default-value="启用" style="width: 120px">
                 <a-select-option value="jack">
                     Jack
                 </a-select-option>
@@ -54,17 +54,23 @@
     </div>
     <standard-table 
       :columns="columns"
+      :defColumns="defColumns"
       :dataSource="dataSource"
       :selectedRows.sync="selectedRows"
       @clear="onClear"
       @change="onChange"
       @selectedRowChange="onSelectChange">
       <div slot="action" slot-scope="{text, record}">
-          <a-button type="link" @click="seeOrEdit(record)">处理详情</a-button>
-        </div>
+        <a-icon type="video-camera" />
+        <a-divider type="vertical" />
+        <a-icon type="environment" />
+        <a-divider type="vertical" />
+        <a-button type="link" @click="seeOrEdit(record)">详情</a-button>
+      </div>
     </standard-table>
 
-    <realTime-modal ref="realTimeModal"/>
+    <realTime-modal ref="historysModal"/>
+
   </div>
 </template>
 
@@ -77,18 +83,101 @@ const columns = [
     dataIndex: 'no'
   },
   {
-    title: '模式名称',
+    title: '报警时间',
+    dataIndex: 'alarmTime'
+  },
+  {
+    title: '报警级别',
+    dataIndex: 'title'
+  },
+  {
+    title: '报警名称',
     dataIndex: 'name'
   },
   {
-    title: '模式类型',
-    dataIndex: 'description',
-    scopedSlots: { customRender: 'description' }
+    title: '报警类型',
+    dataIndex: 'createBy',
+    scopedSlots: { customRender: 'createBy' }
   },
   {
-    title: '模式描述',
+    title: '子系统',
+    dataIndex: 'ds',
+    
+  },
+  {
+    title: '设备名称',
+    dataIndex: 'we',
+    
+  },
+  {
+    title: '设备类型',
+    dataIndex: 'rr',
+    
+  },
+  {
+    title: '位置',
     dataIndex: 'updatedAt',
-    sorter: true
+    
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
+  },
+  {
+    title: '处理人',
+    dataIndex: 'chuseareon',
+  },
+  {
+    title: '操作',
+    width:180,
+    scopedSlots: { customRender: 'action' }
+  },
+]
+
+const defColumns = [
+  {
+    title: '序号',
+    dataIndex: 'no'
+  },
+  {
+    title: '报警时间',
+    dataIndex: 'alarmTime'
+  },
+  {
+    title: '报警级别',
+    dataIndex: 'title'
+  },
+  {
+    title: '报警名称',
+    dataIndex: 'name'
+  },
+  {
+    title: '报警类型',
+    dataIndex: 'createBy',
+    scopedSlots: { customRender: 'createBy' }
+  },
+ {
+    title: '子系统',
+    dataIndex: 'ds',
+    
+  },
+  {
+    title: '设备名称',
+    dataIndex: 'we',
+    
+  },
+  {
+    title: '设备类型',
+    dataIndex: 'rr',
+    
+  },
+  {
+    title: '位置',
+    dataIndex: 'updatedAt',
+  },
+  {
+    title: '处理人',
+    dataIndex: 'chuseareon',
   },
   {
     title: '状态',
@@ -98,24 +187,26 @@ const columns = [
     title: '操作',
     width:180,
     scopedSlots: { customRender: 'action' }
-  }
+  },
 ]
 export default {
-  name:'historysAlarm',
+  name:'historysAlarms',
   components:{StandardTable,realTimeModal},
   data(){
       return{
+        advanced:false,
         selectedRows:[],
         columns:columns,
-dataSource:[
-  {
-    key: '3',
-    description: 'Joe Black',
-    name:'123',
-    age: 32,
-    status: '1',
-  },
-]
+        defColumns:defColumns,
+        dataSource:[
+          {
+            key: '3',
+            description: 'Joe Black',
+            name:'123',
+            age: 32,
+            status: '1',
+          },
+        ],
       }
   },
   methods:{
@@ -124,8 +215,11 @@ dataSource:[
       },
       onClear(){},
       onChange(){},
+      toggleAdvanced () {
+      this.advanced = !this.advanced
+      },
       seeOrEdit(record){
-        this.$refs.realTimeModal.showModal(record)
+        this.$refs.historysModal.showModal(record,true)
       }
   }   
 }

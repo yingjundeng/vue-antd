@@ -1,5 +1,5 @@
 <template>
-  <div class="ature-page">
+  <div class="ature-page" :style="{height:`${bodyHeight}px`}">
      <!-- <div class="ature-left" :style="{width:`${atureLeftWidth}px`}">
          <a-card style="height:90vh;background:rgba(24, 30, 49, 0.8);border:none;">
             <j-tree v-if="isCaret"/>
@@ -26,7 +26,8 @@
          <div class="jump-span"><span>返回</span><span>前进</span></div>
      </div> -->
 
-     <iframe src="https://www.hightopo.com/demo/ketian-cgznksh/" frameborder="0" width="100%" :height="`${minHeight}px`"></iframe>
+     <iframe ref="htmlpage" @load="gg" src="https://www.hightopo.com/demo/ketian-cgznksh/" frameborder="0" width="100%" :height="`${minHeight}px`"></iframe>
+     <!-- <div id="htmlpage"></div> -->
   </div>
 </template>
 
@@ -39,12 +40,26 @@ export default {
   components:{jTree,jAlert,jPicItem},
   data(){
       return{
+          bodyHeight:window.innerHeight-70,
           isCaret:true,
           atureLeftWidth:240,
           minHeight: window.innerHeight + 64 + 126,
       }
   },
+  mounted(){
+      console.log(this.$refs.htmlpage)
+    //   this.initpage()
+  },
   methods:{
+      gg(e){
+         console.log(e) 
+      },
+      initpage(){
+          let src="https://www.hightopo.com/demo/ketian-cgznksh/";
+            $.get(src,function(data){
+               $("htmlpage").html(data);
+            });
+      },
       //收缩side-left
      changeIsCaret(){
          this.isCaret = !this.isCaret
@@ -61,6 +76,7 @@ export default {
 @import '../../theme/default/color.less';
 .ature-page{
     display: flex;
+    overflow-y: scroll;
     .ature-left{
         width: 240px;
         min-height: 90vh;
@@ -109,21 +125,8 @@ export default {
             }
         }
     }
+
+
 }
-.figure{
-  position: absolute;
-  bottom:10px;
-  left:80px;
-  width: 90px;
-  padding: 5px 10px;
-  background: rgba(24, 30, 49, 0.7);
-  color: #fff;
-  border-radius: 5px;
-  text-align: center;
-  .figure-down{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-}
+    
 </style>

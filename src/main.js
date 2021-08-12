@@ -12,9 +12,13 @@ Vue.config.productionTip = false;
 Vue.use(Antd);
 
 import '@/components/echarts'
-// 增加混入
-import shareUtils from "@/mixins/utils";
-Vue.mixin(shareUtils);
+
+
+import VuevideoPlayer from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+Vue.use(VuevideoPlayer);
+const hls = require('videojs-contrib-hls') //兼容m3u8
+Vue.use(hls)
 
 import Storage from 'vue-ls'
 // vue-ls 的配置
