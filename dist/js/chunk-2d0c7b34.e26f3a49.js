@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c7b34"],{5278:function(e){e.exports=JSON.parse('{"unit":"所属部署","selectunit":"所属部署を選んでください","roleName":"キャラクター名","inproleName":"キャラクター名を入力してください","roleCode":"キャラクター表示","inproleCode":"キャラクターロゴを入力してください","roleDesc":"キャラクター記述","inproleDesc":"キャラクタ記述を入力してください"}')}}]);

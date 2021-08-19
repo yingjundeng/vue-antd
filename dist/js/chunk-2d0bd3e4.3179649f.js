@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0bd3e4"],{"2aba":function(e){e.exports=JSON.parse('{"parentId":"親ノード","inpparentId":"親ノードを入力してください","name":"部門名","inpname":"部署名を入力してください","sort":"序列","inpsort":"ソートキーを入力してください","selectEditMenu":"編集するメニューを選択してください","selectDeleteMenu":"削除するメニューを選択してください"}')}}]);

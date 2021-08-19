@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20f1a6"],{b1cd:function(e){e.exports=JSON.parse('{"username":"用户名","inpusername":"请输入用户名","password":"密码","inppassword":"请输入密码","dept":"所属部门","selectdept":"请选择所属部门","phone":"手机号","inpphone":"请输入手机号","role":"角色","selectrole":"请选择角色","lockFlag":"状态","selectlockFlag":"请选择状态"}')}}]);

@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d238691"],{feea:function(e){e.exports=JSON.parse('{"tableName":"表名称","packageName":"包名","author":"作者","moduleName":"模块","tablePrefix":"表前缀","comments":"注释","emp":"可为空，加载系统默认配置"}')}}]);

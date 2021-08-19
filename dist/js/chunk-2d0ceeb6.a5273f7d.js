@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0ceeb6"],{6204:function(p){p.exports=JSON.parse('{"type":"タイプ","inptype":"タイプを入力してください","value":"データ値","inpvalue":"データ値を入力してください","label":"タグ名","inplabel":"タグ名を入力してください","description":"描写","inpdescription":"記述を入力してください","sort":"序列","inpsort":"ソートキーを入力してください","remarks":"備考情報","inpremarks":"備考情報を入力してください"}')}}]);

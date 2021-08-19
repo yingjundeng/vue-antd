@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22c6a4"],{f2ac:function(e){e.exports=JSON.parse('{"tableName":"表名称","packageName":"カバンの人","author":"著者","moduleName":"モジュール","tablePrefix":"表接頭辞","comments":"注釈","emp":"空であってもよく、デフォルトのデフォルト構成がロードされる"}')}}]);

@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0aa616"],{1188:function(e){e.exports=JSON.parse('{"type":"类型","selecttype":"请选择类型","title":"标题","remoteAddr":"IP地址","method":"请求方式","serviceId":"客户端","time":"请求时间","createTime":"创建时间"}')}}]);
